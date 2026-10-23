@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SpendLoom | Student Finance</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>SpendLoom</h1>
+            <p>Your money, under control.</p>
+
+        </header>
+        <main>
+            <section class="summary">
+                <div class="card">
+                    <h3>Available Balance</h3>
+                    <p class="amount">£420.00</p>
+                    <p class="description">Money currently available</p>
+                </div>  
+                <div class="card">
+                    <h3>Safe to Spend</h3>
+                    <p class="amount">£10.00</p>
+                    <p class="description">Your daily spending limit</p>
+                </div>
+                <div class="card">
+                    <h3>Monthly Spending</h3>
+                    <p class="amount">£270.00</p>
+                    <p class="description">Spent this month</p>
+                </div>
+                <div class="card">
+                    <h3>Upcoming Bills</h3>
+                    <p class="amount">£180.00</p>
+                    <p class="description">Payments still due</p>
+                </div>
+            </section>
+            
+            <section class="insights-grid">
+                <div class="panel">
+                    <h2>Spending Overview</h2>
+                    <p class="muted">Your spending category</p>
+                    
+                    <div class="spending-item">
+                        <span>Food & Groceries</span>
+                        <span>£110.00</span>
+                    </div>
+                    <div class="spending-item">
+                        <span>Transport</span>
+                        <span>£45.00</span>
+                    </div>
+                    <div class="spending-item">
+                        <span>Shopping</span>
+                        <span>£38.00</span>
+                    </div>
+                    <div class="spending-item">
+                        <span>Entertainment</span>
+                        <span>£32.00</span>
+                    </div>
+                </div>
+
+                <div class="panel ai-panel">
+                    <h2>AI money Coach</h2>
+                    <p class="muted">A suggestion based on your spending</p>
+
+                    <div class="ai-tip">
+                       <p>
+                          You're spending more on eating out this week.
+                          Planning meals at home could help you save some money.
+                       </p> 
+                    </div>
+                    <button id="tips-button">See more tips</button>
+                    <p id="tips-message" class="muted"></p>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
