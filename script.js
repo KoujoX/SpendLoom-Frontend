@@ -25,10 +25,14 @@ function updateSummary(){
 }
 
 //EXPENSE FORM---------
+const monthlySpending = document.getElementById("monthly-spending");
 const expenseForm = document.getElementById("expense-form");
 const transactionList = document.getElementById("transaction-list");
 const formMessage = document.getElementById("form-message");
-const monthlySpending = document.getElementById("monthly-spending");
+
+expenseForm.addEventListener("input", function () {
+    formMessage.textContent = "";
+})
 
 //Creating a local storage 
 let transactions = JSON.parse(
@@ -44,6 +48,7 @@ expenseForm.addEventListener("submit", function(event) {
     const category = document.getElementById("expense-category").value;
 
     if (!name || !Number.isFinite(amount) || amount <= 0 || !category){
+        formMessage.className = "muted error";
         formMessage.textContent = "Please enter valid expense details";
         return;
     }
@@ -65,6 +70,7 @@ expenseForm.addEventListener("submit", function(event) {
     //Displaying the transaction
     renderTransactions();
 
+    formMessage.className = "muted success";
     formMessage.textContent = "Expense added successfully!";
     expenseForm.reset();
 });
@@ -77,6 +83,7 @@ function renderTransactions(){
         row.className = "transaction";
 
         const details = document.createElement("div");
+        details.className = "transaction-info";
 
         const name = document.createElement("p");
         name.className = "transaction-name";
@@ -89,9 +96,28 @@ function renderTransactions(){
         const amount = document.createElement("span");
         amount.className = "transaction-amount";
         amount.textContent = "-£" + expense.amount.toFixed(2);
+        //Option to delete an expense
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-button";
+
+        deleteButton.addEventListener("click", function() {
+            transactions = transactions.filter(function (item) {
+                return item !== expense;
+            });
+
+            localStorage.setItem("spendloom-transactions", JSON.stringify(transactions));
+
+            renderTransactions();
+            updateSummary();
+        });
 
         details.append(name, info);
-        row.append(details, amount);
+        const transactionMain = document.createElement("div");
+        transactionMain.className = "transaction-main";
+        transactionMain.append(details, amount);
+
+        row.append(transactionMain, deleteButton);
         transactionList.appendChild(row);
     });
 

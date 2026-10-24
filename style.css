@@ -186,23 +186,49 @@ button:hover {
     margin-top: 12px;
 }
 
+#form-message {
+    min-height: 20px;
+}
+
+#form-message.success {
+    color: #34D399;
+}
+
+#form-message.error {
+    color: #FCA5A5;
+}
+
 .transaction {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    padding: 14px 0;
+    gap: 20px;  /*12*/
+    padding: 18px 0;  /*14px 0*/
     border-bottom: 1px solid #293858;
+}
+
+.transaction-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    min-width: 0;
+}
+
+.transaction-info {
+    min-width: 0;
 }
 
 .transaction-name {
     font-weight: bold;
-    margin: 0 0 5px;
+    margin: 0 0 8px;
+    overflow-wrap: anywhere;
 }
 
 .transaction-details {
     color: #A8B3CF;
-    font-size: 12px;
+    font-size: 14px;
     margin: 0;
 }
 
@@ -210,6 +236,7 @@ button:hover {
     color: #FCA5A5;
     font-weight: bold;
     white-space: nowrap;
+    font-size: 18px;
 }
 
 #transaction-list {
@@ -222,9 +249,21 @@ button:hover {
 
 
 
+/* DELETE BUTTON */
+.delete-button {
+    background: #3A1D2A;
+    color: #FCA5A5;
+    border: 1px solid #713044;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
 
-
-
+.delete-button:hover {
+    background: #572337;
+    filter: none;
+}
 
 
 /* RESPONSIVE LAYOUT */
