@@ -247,7 +247,13 @@ button:hover {
     scrollbar-width: thin;
 }
 
-
+/* BALANCE WARNING */
+.balance-warning {
+    color: #FCA5A5;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
 
 /* DELETE BUTTON */
 .delete-button {

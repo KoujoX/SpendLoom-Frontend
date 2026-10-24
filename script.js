@@ -19,6 +19,15 @@ function updateSummary(){
     const availableBalance = startingBalance - totalSpent;
     const moneyAfterBills = availableBalance - upcomingBillsTotal;
     const safeToSpend = Math.max(0, moneyAfterBills / daysUntilNextPayment);
+    const balanceWarning = document.getElementById("balance-warning");
+
+    if (moneyAfterBills < 0) {
+        balanceWarning.textContent = "Warning: you're short of money for your upcoming bills.";
+    } else if (moneyAfterBills < 50) {
+        balanceWarning.textContent = "Careful: you have less than £50 left after upcoming bills.";
+    } else {
+        balanceWarning.textContent = "";
+    }
 
     document.getElementById("available-balance").textContent = "£" + availableBalance.toFixed(2);
     document.getElementById("safe-to-spend").textContent = "£" + safeToSpend.toFixed(2);
