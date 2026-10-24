@@ -6,13 +6,34 @@ tipsButton.addEventListener("click", function(){
     tipsButton.textContent = "Tips coming soon";
 });
 
+const startingBalance = 420;
+const upcomingBillsTotal = 180;
+const daysUntilNextPayment = 14;
+
+function updateSummary(){
+    const totalSpent = transactions.reduce(function (total, expense) {
+        return total + expense.amount;
+    }, 0);
+    document.getElementById("monthly-spending").textContent = "£" + totalSpent.toFixed(2)
+
+    const availableBalance = startingBalance - totalSpent;
+    const moneyAfterBills = availableBalance - upcomingBillsTotal;
+    const safeToSpend = Math.max(0, moneyAfterBills / daysUntilNextPayment);
+
+    document.getElementById("available-balance").textContent = "£" + availableBalance.toFixed(2);
+    document.getElementById("safe-to-spend").textContent = "£" + safeToSpend.toFixed(2);
+}
+
 //EXPENSE FORM---------
 const expenseForm = document.getElementById("expense-form");
 const transactionList = document.getElementById("transaction-list");
 const formMessage = document.getElementById("form-message");
 const monthlySpending = document.getElementById("monthly-spending");
 
-let transactions = [];
+//Creating a local storage 
+let transactions = JSON.parse(
+    localStorage.getItem("spendloom-transactions")
+) || [];
 
 expenseForm.addEventListener("submit", function(event) {
     //Preventing the page from refreshing
@@ -37,12 +58,10 @@ expenseForm.addEventListener("submit", function(event) {
 
     //Storing the transaction
     transactions.unshift(expense);
-    const totalSpent = transactions.reduce(function (total, expense) {
-        return total + expense.amount;
-    }, 0);
-    monthlySpending.textContent = "£" + totalSpent.toFixed(2);
-    
+    localStorage.setItem("spendloom-transactions", JSON.stringify(transactions));
 
+    //Updating  the financial figures
+    updateSummary();
     //Displaying the transaction
     renderTransactions();
 
@@ -105,3 +124,8 @@ function renderTransactions(){
     document.getElementById("bills-total").textContent = "£" + categoryTotals.Bills.toFixed(2);
     document.getElementById("other-total").textContent = "£" + categoryTotals.Other.toFixed(2);
 }
+
+
+//DISPLAY THE SAVED EXPENSES ON PAGE LOAD
+renderTransactions();
+updateSummary();

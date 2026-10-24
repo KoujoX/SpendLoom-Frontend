@@ -212,6 +212,13 @@ button:hover {
     white-space: nowrap;
 }
 
+#transaction-list {
+    max-height:380px;
+    overflow-y: auto;
+    padding-right: 8px;
+    scrollbar-color: #52658A #111F3D;
+    scrollbar-width: thin;
+}
 
 
 
