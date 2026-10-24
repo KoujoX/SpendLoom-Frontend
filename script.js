@@ -6,10 +6,11 @@ tipsButton.addEventListener("click", function(){
     tipsButton.textContent = "Tips coming soon";
 });
 
-//EXPENSE FORM
+//EXPENSE FORM---------
 const expenseForm = document.getElementById("expense-form");
 const transactionList = document.getElementById("transaction-list");
 const formMessage = document.getElementById("form-message");
+const monthlySpending = document.getElementById("monthly-spending");
 
 let transactions = [];
 
@@ -34,8 +35,15 @@ expenseForm.addEventListener("submit", function(event) {
         date: new Date().toLocaleDateString("en-GB")
     };
 
-    //Storing and displaying the transaction
+    //Storing the transaction
     transactions.unshift(expense);
+    const totalSpent = transactions.reduce(function (total, expense) {
+        return total + expense.amount;
+    }, 0);
+    monthlySpending.textContent = "£" + totalSpent.toFixed(2);
+    
+
+    //Displaying the transaction
     renderTransactions();
 
     formMessage.textContent = "Expense added successfully!";
@@ -74,4 +82,26 @@ function renderTransactions(){
         emptyMessage.textContent = "No transactions added yet.";
         transactionList.appendChild(emptyMessage);
     }
+
+    const categoryTotals = {
+        Food: 0,
+        Transport: 0,
+        Shopping: 0,
+        Entertainment: 0,
+        Bills: 0,
+        Other: 0
+    };
+
+    transactions.forEach(function (expense) {
+        if (categoryTotals[expense.category] !== undefined) {
+            categoryTotals[expense.category] += expense.amount;
+        }
+    });
+
+    document.getElementById("food-total").textContent = "£" + categoryTotals.Food.toFixed(2);         
+    document.getElementById("transport-total").textContent = "£" + categoryTotals.Transport.toFixed(2);
+    document.getElementById("shopping-total").textContent = "£" + categoryTotals.Shopping.toFixed(2);
+    document.getElementById("entertainment-total").textContent = "£" + categoryTotals.Entertainment.toFixed(2);
+    document.getElementById("bills-total").textContent = "£" + categoryTotals.Bills.toFixed(2);
+    document.getElementById("other-total").textContent = "£" + categoryTotals.Other.toFixed(2);
 }
