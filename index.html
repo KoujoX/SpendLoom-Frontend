@@ -74,6 +74,46 @@
                     <p id="tips-message" class="muted"></p>
                 </div>
             </section>
+
+            <section class="transactions-grid">
+                <div class="panel">
+                    <h2>Recent Transactions</h2>
+                    <p class="muted">Your latest expenses</p>
+                    <div id="transaction-list">
+                        <p class="muted">No transactions added yet.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>Add New Expense</h2>
+                    <p class="muted">Your latest expenses</p>
+                    <div id="transaction-list">
+                        <p class="muted">Record where your money goes</p>
+                    </div>
+
+                    <form id="expense-form">
+                        <label for="expense-name">Expense name</label>
+                        <input type="text" id="expense-name" placeholder="e.g. Groceries" required>
+                        
+                        <label for="expense-amount">Amount (£)</label>
+                        <input type="number" id="expense-amount" placeholder="e.g. 12.50" min="0.05" step="0.05" required>
+                        
+                        <label for="expense-category">Category</label>
+                        <select id="expense-category"  required>
+                            <option value="">Choose a category</option>
+                            <option value="Food">Food & Groceries</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <button type="submit">Add Expense</button>
+                        <p id="form-message" class="muted"></p>
+                    </form>
+                </div>
+                
+            </section>
         </main>
     </body>
 </html>
